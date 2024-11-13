@@ -1,0 +1,15 @@
+# Node modules
+/node_modules
+
+# .env files (cẩn thận với thông tin nhạy cảm)
+.env
+
+# Logs
+*.log
+
+# Thư mục build và dist
+build/
+dist/
+
+# Các tệp khác có thể bỏ qua tùy theo dự án
+.DS_Store
