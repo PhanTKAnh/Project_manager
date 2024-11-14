@@ -4,6 +4,7 @@ include ../../mixins/search
 include ../../mixins/pagination
 include ../../mixins/form-change-multi
 include ../../mixins/alert
+include ../../mixins/sort
 block main
     +alert-success("5000")
     h1 Danh sách sản phẩm
@@ -30,6 +31,13 @@ block main
                             href = `${prefixAdmin}/product/create`
                             class="btn btn-outline-success"
                         ) + Thêm mới 
+    .card.mb-3 
+            .card-header Sắp xếp 
+                .card-body
+                    .row 
+                        .col-4 
+                           +sort()
+
                 table(
                     class="table table-hover table-sm"
                     checkbox-multi 
