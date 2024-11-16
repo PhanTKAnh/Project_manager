@@ -1,4 +1,5 @@
 const express = require('express');
+var path = require('path');
 var methodOverride = require('method-override')
 var bodyParser = require('body-parser')
 const cookieParser = require("cookie-parser")
@@ -24,7 +25,7 @@ app.use(methodOverride('_method'))
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 
-console.log(__dirname);
+// console.log(__dirname);
 
 
 app.use(express.static(`${__dirname}/public`));
@@ -32,12 +33,15 @@ app.use(express.static(`${__dirname}/public`));
 app.set('views',`${__dirname}/views`);
 app.set('view engine', 'pug');
 
+// flash
 app.use(cookieParser('keyboard cat'));
 app.use(session({ cookie: { maxAge: 60000 }}));
 app.use(flash());
+//end flash
 
-
-
+// tinymce
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
+//End tinymce
 // App Locals Variable
 app.locals.prefixAdmin = sytemConfig.prefixAdmin;
 

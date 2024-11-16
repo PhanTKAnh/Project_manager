@@ -22,8 +22,8 @@ block main
             if(product.status === "inactive")
                 span( class="badge badge-danger") Dừng hoạt động 
     if(product.description)
-        div(class="mb-4") #{product.description}
+        div(class="mb-4") !{product.description}
     a(
         href=`${prefixAdmin}/product/edit/${product.id}`
-        class="btn btn-warning btn-sm") Sửa
+        class="btn btn-warning btn-sm") Chỉnh Sửa
     script(src="/admin/js/product.js") 
