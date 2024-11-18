@@ -5,6 +5,7 @@ const systemConfig = require("../../config/system")
 const filterStatusHelper = require("../../helpers/filterStatus")
 const searchHelper = require("../../helpers/search")
 const paginationHelper = require("../../helpers/pagination");
+const createTreeHelper = require("../../helpers/createTree")
 
 
 // [GET] /admin/product-category
@@ -22,23 +23,8 @@ module.exports.index = async (req, res) => {
         find.title = objectSearch.regex;
 
     }
-    function createTree(arr,parentId = ""){
-        const tree = [];
-        arr.forEach((item) => {
-            if(item.parent_id === parentId){
-                const newItem = item;
-                const children = createTree(arr,item.id);
-                if(children.length>0){
-                    newItem.children = children;
-                }
-                tree.push(newItem);
-            }
-            
-        });
-        return tree;
-    }
     const record = await ProductCategory.find(find)
-    const newRcord =createTree(record);
+    const newRcord =createTreeHelper.tree(record);
 
     res.render("admin/pages/product-category/index",{
         pageTitle: "Trang danh mục sản phẩm  ",
@@ -47,29 +33,15 @@ module.exports.index = async (req, res) => {
         objectSearch:objectSearch.keyword,
     });
 };
-// [GET] /admin/product-category
+// [POST] /admin/product-category/create
 module.exports.create = async (req, res) => {
     let find = {
         deleted: false
     };
     
-    function createTree(arr,parentId = ""){
-        const tree = [];
-        arr.forEach((item) => {
-            if(item.parent_id === parentId){
-                const newItem = item;
-                const children = createTree(arr,item.id);
-                if(children.length>0){
-                    newItem.children = children;
-                }
-                tree.push(newItem);
-            }
-            
-        });
-        return tree;
-    }
+   
     const record = await ProductCategory.find(find).sort({position:"asc"});
-    const newRcord =createTree(record);
+    const newRcord =createTreeHelper.tree(record);
     console.log(newRcord)
     res.render("admin/pages/product-category/create",{
         pageTitle:"Tạo danh muc san pham",
