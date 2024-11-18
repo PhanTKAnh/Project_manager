@@ -28,13 +28,16 @@ if(buttonDelete.length > 0){
     console.log(path);
     buttonDelete.forEach(button =>{
         button.addEventListener("click",() =>{
-            const id = button.getAttribute("data-id");
+            const isConfirm = confirm("Ban co chac mun xoa san pham nay");
+            if(isConfirm){
+                const id = button.getAttribute("data-id");
             
-            const action = path + `/${id}?_method=DELETE`
-            formDeleteItem.action = action;
-            formDeleteItem.submit();
+                const action = path + `/${id}?_method=DELETE`
+                formDeleteItem.action = action;
+                formDeleteItem.submit();
+            }
+            
         })
     })
 }
-
 // end delete
