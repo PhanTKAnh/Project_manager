@@ -1,0 +1,67 @@
+extends ../../layout/default.pug
+include ../../mixins/filter-status
+include ../../mixins/search
+include ../../mixins/form-change-multi
+include ../../mixins/alert
+include ../../mixins/table-tree.pug
+
+block main
+    h1 Danh sách sản phẩm
+    .card.mb-3 
+        .card-header Bộ lọc tìm kiếm 
+            .card-body 
+                .row
+                    .col-6
+                        +filter-status(filterStatus)
+
+                    .col-6
+                        +search(keyword)
+    .card.mb-3 
+        .card-header Bộ lọc tìm kiếm 
+            .card-body
+                .row 
+                    .col-8 
+                        +form-change-multi(`${prefixAdmin}/product-category/change-multi?_method=PATCH`)
+    .card.mb-3 
+        .card-header Danh sách 
+            .card-body
+                .row 
+                    .col-8 
+                    .col-4 
+                        a(
+                            href = `${prefixAdmin}/product-category/create`
+                            class="btn btn-outline-success"
+                        ) + Thêm mới 
+
+   
+                table(
+                    class="table table-hover table-sm"
+                    checkbox-multi 
+                )    
+                    thead 
+                        tr 
+                            th 
+                                input(type="checkbox" name="checkall")
+                            th STT 
+                            th Hình ảnh
+                            th Tiêu đề
+                            th Vị trí
+                            th Trạng thái 
+                            th Hành động
+
+                    tbody
+                      +table-tree(record)
+    form(
+        action=""
+        method="POST"
+        id="form-change-status"
+        data-path=`${prefixAdmin}/product-category/change-status`
+    )
+    form(
+        action=""
+        method="POST"
+        id="form-delete"
+        data-path=`${prefixAdmin}/product-category/delete`
+    )
+
+    script(src="/admin/js/product-category.js") 
