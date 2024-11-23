@@ -1,0 +1,56 @@
+extends ../../layout/default.pug
+include ../../mixins/filter-status
+include ../../mixins/search
+include ../../mixins/form-change-multi
+include ../../mixins/alert
+include ../../mixins/table-tree.pug
+
+block main
+    h1.cart.mb-3 Nhóm quyền 
+    .cart.mb-3
+        .card-header Danh sách 
+            .card-body
+                .row 
+                    .col-8 
+                    .col-4 
+                        a(
+                            href = `${prefixAdmin}/roles/create`
+                            class="btn btn-outline-success"
+                        ) + Thêm mới 
+
+                table(
+                    class="table table-hover table-sm"
+                    checkbox-multi 
+                )    
+                    thead 
+                        tr 
+                            th 
+                                input(type="checkbox" name="checkall")
+                            th STT 
+                            th Nhóm quyền
+                            th Mô tả ngắn 
+                            th Hành động
+
+                    tbody
+                        if(record.length>0)
+                         each item, index in record 
+                            tr 
+                                td
+                                td #{index + 1}
+                                td #{item.title}
+                                td !{item.description}
+                                td 
+                                        a(
+                                            href=`${prefixAdmin}/roles/detail/${item.id}`
+                                                class="btn btn-secondary btn-sm") Chi tiết 
+                                        a(
+                                            href=`${prefixAdmin}/roles/edit/${item.id}`
+                                            class="btn btn-warning btn-sm") Sửa
+                                        button(class="btn btn-danger btn-sm ml-1" 
+                                        button-delete
+                                        data-id= item.id 
+                                        ) Xóa
+
+  
+
+    script(src="/admin/js/product-category.js") 
