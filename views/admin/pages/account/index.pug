@@ -1,0 +1,75 @@
+extends ../../layout/default.pug
+include ../../mixins/filter-status
+include ../../mixins/search
+include ../../mixins/form-change-multi
+include ../../mixins/alert
+include ../../mixins/table-tree.pug
+
+block main
+    h1.mb-4 Danh sách tài khoản
+    .cart.mb-3
+        .card-header Danh sách 
+            .card-body
+                .row 
+                    .col-8 
+                    .col-4 
+                        a(
+                            href = `${prefixAdmin}/account/create`
+                            class="btn btn-outline-success"
+                        ) + Thêm mới 
+                table(
+                    class="table table-hover table-sm"
+                    checkbox-multi 
+                )    
+                    thead 
+                        tr 
+                            th STT 
+                            th Avatar
+                            th Họ tên 
+                            th Phân quyền 
+                            th Email
+                            th Trạng thái 
+                            th Hành động
+
+                    tbody
+                        each item,index in record
+                            tr 
+                                td #{index+1}
+                                td 
+                                    img(
+                                        src=item.avatar
+                                        alt =item.fullname
+                                        width="100px"
+                                        height="auto"
+                                    )
+                                td #{item.fullname}
+                                td #{item.role.title}
+                                td #{item.email}
+                                td 
+                                    if(item.status == "active")
+                                        a(href="javascript:;" 
+                                            data-status=item.status 
+                                            data-id=item.id
+                                            button-change-status
+                                            class="badge badge-success"
+                                        ) Hoạt động
+                                    else 
+                                        a(
+                                            href="javascript:;" 
+                                            data-status=item.status 
+                                            data-id=item.id 
+                                             button-change-status
+                                            class="badge badge-danger"
+                                        ) Không hoạt động
+                                td 
+                                    a(
+                                        href=`${prefixAdmin}/account/detail/${item.id}`
+                                        class="btn btn-secondary btn-sm") Chi tiết 
+                                    a(
+                                        href=`${prefixAdmin}/account/edit/${item.id}`
+                                        class="btn btn-warning btn-sm") Sửa
+                                    button(class="btn btn-danger btn-sm ml-1" 
+                                    button-delete
+                                    data-id= item.id 
+
+                                    ) Xóa
