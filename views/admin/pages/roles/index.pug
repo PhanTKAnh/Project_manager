@@ -6,6 +6,7 @@ include ../../mixins/alert
 include ../../mixins/table-tree.pug
 
 block main
+  if(role.permissions.includes("roles_view"))
     h1.cart.mb-3 Nhóm quyền 
     .cart.mb-3
         .card-header Danh sách 
@@ -13,6 +14,7 @@ block main
                 .row 
                     .col-8 
                     .col-4 
+                      if(role.permissions.includes("roles_create"))
                         a(
                             href = `${prefixAdmin}/roles/create`
                             class="btn btn-outline-success"
@@ -43,13 +45,15 @@ block main
                                         a(
                                             href=`${prefixAdmin}/roles/detail/${item.id}`
                                                 class="btn btn-secondary btn-sm") Chi tiết 
-                                        a(
-                                            href=`${prefixAdmin}/roles/edit/${item.id}`
-                                            class="btn btn-warning btn-sm") Sửa
-                                        button(class="btn btn-danger btn-sm ml-1" 
-                                        button-delete
-                                        data-id= item.id 
-                                        ) Xóa
+                                        if(role.permissions.includes("roles_edit"))
+                                            a(
+                                                href=`${prefixAdmin}/roles/edit/${item.id}`
+                                                class="btn btn-warning btn-sm") Sửa
+                                        if(role.permissions.includes("roles_delete"))
+                                            button(class="btn btn-danger btn-sm ml-1" 
+                                            button-delete
+                                            data-id= item.id 
+                                            ) Xóa
 
   
 

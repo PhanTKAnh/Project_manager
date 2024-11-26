@@ -1,8 +1,9 @@
 extends ../../layout/default.pug
 include ../../mixins/alert.pug
 block main 
+ f(role.permissions.includes("roles_edit"))
     +alert-error(3000)
-    h1(class="mb-4") Thêm mới một sản phẩm 
+    h1(class="mb-4") Sửa một sản phẩm 
     form(
         action=`${prefixAdmin}/roles/edit/${data.id}?_method=PATCH`
         method="POST"

@@ -6,6 +6,7 @@ include ../../mixins/form-change-multi
 include ../../mixins/alert
 include ../../mixins/sort
 block main
+  if(role.permissions.includes("products_view"))
     +alert-success("5000")
     h1 Danh sách sản phẩm
 
@@ -27,6 +28,7 @@ block main
                     .col-8 
                         +form-change-multi(`${prefixAdmin}/product/change-multi?_method=PATCH`)
                     .col-4 
+                    if(role.permissions.includes("products_view"))
                         a(
                             href = `${prefixAdmin}/product/create`
                             class="btn btn-outline-success"
@@ -82,33 +84,41 @@ block main
                                         name = "position"
                                     )
                                 td 
-                                    if(item.status == "active")
-                                        a(href="javascript:;" 
-                                            data-status=item.status 
-                                            data-id=item.id
-                                            button-change-status
-                                            class="badge badge-success"
-                                        ) Hoạt động
+                                    if(role.permissions.includes("products_edit"))
+                                        if(item.status == "active")
+                                            a(href="javascript:;" 
+                                                data-status=item.status 
+                                                data-id=item.id
+                                                button-change-status
+                                                class="badge badge-success"
+                                            ) Hoạt động
+                                        else 
+                                            a(
+                                                href="javascript:;" 
+                                                data-status=item.status 
+                                                data-id=item.id 
+                                                button-change-status
+                                                class="badge badge-danger"
+                                            ) Không hoạt động
                                     else 
-                                        a(
-                                            href="javascript:;" 
-                                            data-status=item.status 
-                                            data-id=item.id 
-                                             button-change-status
-                                            class="badge badge-danger"
-                                        ) Không hoạt động
+                                        if(item.status == "active")
+                                            <span class="badge badge-success">Hoạt động</span>
+                                        else 
+                                            <span class="badge badge-danger">Không hoạt động</span>
                                 td 
                                     a(
                                         href=`${prefixAdmin}/product/detail/${item.id}`
                                         class="btn btn-secondary btn-sm") Chi tiết 
-                                    a(
-                                        href=`${prefixAdmin}/product/edit/${item.id}`
-                                        class="btn btn-warning btn-sm") Sửa
-                                    button(class="btn btn-danger btn-sm ml-1" 
-                                    button-delete
-                                    data-id= item.id 
+                                    if(role.permissions.includes("products_edit"))      
+                                        a(
+                                            href=`${prefixAdmin}/product/edit/${item.id}`
+                                            class="btn btn-warning btn-sm") Sửa
+                                    if(role.permissions.includes("products_delete"))
+                                        button(class="btn btn-danger btn-sm ml-1" 
+                                        button-delete
+                                        data-id= item.id 
 
-                                    ) Xóa
+                                        ) Xóa
     +pagination(pagination)
 
     form(

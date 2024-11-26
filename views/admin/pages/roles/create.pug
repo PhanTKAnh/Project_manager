@@ -1,5 +1,6 @@
 extends ../../layout/default.pug
 block main 
+  f(role.permissions.includes("roles_create"))
     h1(class="mb-4") Thêm mới một sản phẩm 
     form(
         action=`${prefixAdmin}/roles/create`

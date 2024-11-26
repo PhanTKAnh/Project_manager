@@ -3,6 +3,7 @@ include ../../mixins/alert.pug
 include ../../mixins/select-tree.pug
 
 block main
+ if(role.permissions.includes("products_edit"))
   +alert-success(3000)
   +alert-error(3000)
   h1(class="mb-4") Chỉnh sửa một sản phẩm

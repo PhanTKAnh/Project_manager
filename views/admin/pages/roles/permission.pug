@@ -1,6 +1,7 @@
 extends ../../layout/default.pug
 include ../../mixins/alert.pug
 block main 
+ if(role.permissions.includes("roles_permissions"))
     +alert-error(3000)
     h1(class="mb-4") Phân Quyền 
     if(record)
@@ -99,6 +100,31 @@ block main
                                 input(type="checkbox")
                     tr(data-name="roles_permissions")
                         td Phân quyền 
+                         each item in record
+                            td(class="text-center")
+                                input(type="checkbox")
+
+                    //- Danh Sach quyen
+                    tr 
+                        td(colspan="4")
+                            b Tài khoản 
+                    tr(data-name="account_view")
+                        td Xem
+                        each item in record
+                            td(class="text-center")
+                                input(type="checkbox")                       
+                    tr(data-name="account_create")
+                        td Thêm mới 
+                         each item in record
+                            td(class="text-center")
+                                input(type="checkbox")
+                    tr(data-name="account_edit")
+                        td Chỉnh sửa  
+                        each item in record
+                            td(class="text-center")
+                                input(type="checkbox")
+                    tr(data-name="account_delete")
+                        td Xóa 
                          each item in record
                             td(class="text-center")
                                 input(type="checkbox")

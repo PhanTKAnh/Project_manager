@@ -6,6 +6,7 @@ include ../../mixins/alert
 include ../../mixins/table-tree.pug
 
 block main
+ if(role.permissions.includes("account_view"))
     h1.mb-4 Danh sách tài khoản
     .cart.mb-3
         .card-header Danh sách 
@@ -13,6 +14,7 @@ block main
                 .row 
                     .col-8 
                     .col-4 
+                    if(role.permissions.includes("account_create"))
                         a(
                             href = `${prefixAdmin}/account/create`
                             class="btn btn-outline-success"
@@ -45,7 +47,9 @@ block main
                                 td #{item.fullname}
                                 td #{item.role.title}
                                 td #{item.email}
+                                
                                 td 
+                                  if(role.permissions.includes("account_edit"))
                                     if(item.status == "active")
                                         a(href="javascript:;" 
                                             data-status=item.status 
@@ -61,15 +65,22 @@ block main
                                              button-change-status
                                             class="badge badge-danger"
                                         ) Không hoạt động
+                                  else 
+                                        if(item.status == "active")
+                                            <span class="badge badge-success">Hoạt động</span>
+                                        else 
+                                            <span class="badge badge-danger">Không hoạt động</span>
                                 td 
                                     a(
                                         href=`${prefixAdmin}/account/detail/${item.id}`
                                         class="btn btn-secondary btn-sm") Chi tiết 
-                                    a(
-                                        href=`${prefixAdmin}/account/edit/${item.id}`
-                                        class="btn btn-warning btn-sm") Sửa
-                                    button(class="btn btn-danger btn-sm ml-1" 
-                                    button-delete
-                                    data-id= item.id 
+                                    if(role.permissions.includes("account_edit"))
+                                        a(
+                                            href=`${prefixAdmin}/account/edit/${item.id}`
+                                            class="btn btn-warning btn-sm") Sửa
+                                    if(role.permissions.includes("account_delete"))
+                                        button(class="btn btn-danger btn-sm ml-1" 
+                                        button-delete
+                                        data-id= item.id 
 
-                                    ) Xóa
+                                        ) Xóa

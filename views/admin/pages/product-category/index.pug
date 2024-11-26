@@ -6,6 +6,7 @@ include ../../mixins/alert
 include ../../mixins/table-tree.pug
 
 block main
+  if(role.permissions.includes("products-category_view"))
     h1 Danh sách sản phẩm
     .card.mb-3 
         .card-header Bộ lọc tìm kiếm 
@@ -28,6 +29,7 @@ block main
                 .row 
                     .col-8 
                     .col-4 
+                      if(role.permissions.includes("products-category_create"))
                         a(
                             href = `${prefixAdmin}/product-category/create`
                             class="btn btn-outline-success"
