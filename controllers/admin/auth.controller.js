@@ -2,13 +2,17 @@ const Account = require("../../models/account.model");
 
 var md5 = require('md5');
 const systemConfig = require("../../config/system")
-const validate = require("../../validates/admin/auth.validate")
-
 // [GET] /admin/auth/login
 module.exports.login= (req, res) => {
-    res.render("admin/pages/auth/login",{
-        pageTitle:"Đăng nhập "
-    });
+    console.log(req.cookies.token);
+    if(req.cookies.token){
+        res.redirect(`${systemConfig.prefixAdmin}/dashboard`)
+    }else{
+        res.render("admin/pages/auth/login",{
+            pageTitle:"Đăng nhập "
+        });
+    }
+    
 };
 // [POST] /admin/auth/login
 module.exports.loginPost= async (req, res) => {
@@ -24,7 +28,6 @@ module.exports.loginPost= async (req, res) => {
     res.redirect("back");
     return;
    }
-   console.log(password);
    if(md5(password) != user.password){
     req.flash("error","Mật khẩu không chính xác");
     res.redirect("back");
@@ -37,4 +40,9 @@ module.exports.loginPost= async (req, res) => {
    }
    res.cookie("token", user.token)
    res.redirect(`${systemConfig.prefixAdmin}/dashboard`)
+};
+// [GET] /admin/auth/login
+module.exports.logout= (req, res) => {
+    res.clearCookie("token")
+    res.redirect(`${systemConfig.prefixAdmin}/auth/login`)
 };
