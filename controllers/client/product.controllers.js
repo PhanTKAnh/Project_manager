@@ -12,7 +12,6 @@ module.exports.index = async (req, res) => {
         return item
     })
 
-    console.log(products);
     res.render("client/pages/products/index",{
         pageTitle:"Danh sách sản phẩm",
         products:newProduct
@@ -27,7 +26,6 @@ module.exports.detail = async (req, res) => {
             status:"active"
         }
         const product = await Product.findOne(find);
-        console.log(product)
         res.render("client/pages/products/detail",{
             pageTitle:"Danh sách sản phẩm",
             product: product
