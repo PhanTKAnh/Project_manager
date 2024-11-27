@@ -7,6 +7,7 @@ const filterStatusHelper = require("../../helpers/filterStatus")
 const searchHelper = require("../../helpers/search")
 const paginationHelper = require("../../helpers/pagination");
 const createTreeHelper = require("../../helpers/createTree")
+const Account = require("../../models/account.model");
 
 
 
@@ -59,11 +60,21 @@ module.exports.index = async (req, res) => {
 
     //end sort
 
+
+
     const products = await Product.find(find)
         .sort(sort)
         .limit(objectPagination.litmitItems)
         .skip(objectPagination.skip);
-
+    for(const product of products){
+        const user = await Account.findOne({
+            _id:product.createdBy.account_id
+        })
+        if(user){
+            product.accountFullName = user.fullname
+        }
+    }
+   
 
     res.render("admin/pages/products/index", {
         pageTitle: "Trang sản phẩm ",
@@ -126,7 +137,11 @@ module.exports.deleteItem = async (req, res) => {
     // await Product.deleteOne({_id:id});
     await Product.updateOne({ _id: id }, {
         deleted: true,
-        deleteAt: new Date()
+        // deleteAt: new Date()
+        deletedBy:{
+            account_id:res.locals.user.id,
+            deletedAt: new Date()
+        }
     });
 
     req.flash('success', `Đã xóa thành công sản phẩm !`);
@@ -136,6 +151,7 @@ module.exports.deleteItem = async (req, res) => {
 
 // [GET] /admin/product/create
 module.exports.create = async (req, res) => { 
+    console.log(res.locals.user);
     let find = {
         deleted: false,
 
@@ -158,6 +174,9 @@ module.exports.createPost = async (req, res) => {
         req.body.position = countProducts + 1;
     } else {
         req.body.position = parseInt(req.body.position)
+    }
+    req.body.createdBy = {
+        account_id:res.locals.user.id
     }
     const product = new Product(req.body)
     await product.save();

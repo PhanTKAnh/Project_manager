@@ -5,6 +5,7 @@ var bodyParser = require('body-parser')
 const cookieParser = require("cookie-parser")
 const session = require("express-session")
 var flash = require('express-flash')
+var moment= require('moment')
 require('dotenv').config()
 const database =require("./config/database");
 database.connect();
@@ -42,8 +43,11 @@ app.use(flash());
 // tinymce
 app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
 //End tinymce
+
+
 // App Locals Variable
 app.locals.prefixAdmin = sytemConfig.prefixAdmin;
+app.locals.moment = moment;
 
 // Route
 routeAdmin(app);
