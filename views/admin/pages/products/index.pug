@@ -55,8 +55,9 @@ block main
                             th Tiêu đề
                             th Giá
                             th Vị trí
-                            th Người tạo 
                             th Trạng thái 
+                            th Người tạo 
+                            th Người cập nhật
                             th Hành động
 
                     tbody
@@ -86,11 +87,6 @@ block main
                                         min="1"
                                         name = "position"
                                     )
-                                td
-                                    p #{item.accountFullName}
-                                    p 
-                                    +formatDateTime(item.createdBy.createAt)
-                                   
                                 td 
                                     if(role.permissions.includes("products_edit"))
                                         if(item.status == "active")
@@ -113,6 +109,17 @@ block main
                                             <span class="badge badge-success">Hoạt động</span>
                                         else 
                                             <span class="badge badge-danger">Không hoạt động</span>
+                                td
+                                    p #{item.accountFullName}
+                                    p 
+                                    +formatDateTime(item.createdBy.createAt)
+                                td
+                                    - const updatedBy = item.updatedBy.slice(-1)[0];
+                                    if(updatedBy)
+                                        p #{updatedBy.accountFullName}
+                                        p 
+                                        +formatDateTime(item.updatedBy.updatedAt)
+                                   
                                 td 
                                     a(
                                         href=`${prefixAdmin}/product/detail/${item.id}`

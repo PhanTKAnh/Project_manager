@@ -27,18 +27,26 @@ const productSchema = new mongoose.Schema(
             default: Date.now
            }
          },
+        updatedBy:[
+            {
+                account_id: String,
+                updatedAt:{
+                 type: Date,
+                 default: Date
+                }
+              },
+        ],
         deleted: {
             type: Boolean,
             default: false
         },
         deletedBy:{
-            account_id: String,
-            deletedAt:Date
-          },
+                account_id: String,
+                deletedAt:Date
+            }
+        
 
-    }, {
-    timestamps: true
-}
+    }, 
 );
 const Product = mongoose.model('Product', productSchema, "products");
 
