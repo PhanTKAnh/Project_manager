@@ -17,8 +17,9 @@ module.exports.index = async (req, res) => {
         deleted:false,
         status:"active"
      }).sort({position:"desc"}).limit(6)
+
     // End Hiển thị sản phẩm mới nhẩt
-    const newProductNew =productHelper.priceNewProduct(productNew);
+    const newProductNew =productHelper.priceNewProducts(productNew);
     res.render("client/pages/home/index",{
         pageTitle:"Trang chủ",
         productFeature:newProductFeature,
