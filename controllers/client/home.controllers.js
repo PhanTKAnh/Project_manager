@@ -9,7 +9,7 @@ module.exports.index = async (req, res) => {
         status:"active"
     }).limit(6);
 
-    const newProductFeature =productHelper.priceNewProduct(productFeature);
+    const newProductFeature =productHelper.priceNewProducts(productFeature);
     // lấy ra sản phẩm nổi bật
 
     // Hiển thị sản phẩm mới nhẩt
