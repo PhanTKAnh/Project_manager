@@ -1,5 +1,7 @@
 //[GET] /product
 const Product = require("../../models/product.model")
+const productHelper = require("../../helpers/product")
+
 
 module.exports.index = async (req, res) => {
     const products =await Product.find({
@@ -7,10 +9,7 @@ module.exports.index = async (req, res) => {
         deleted:false
     }).sort({position:"desc"});
 
-    const newProduct = products.map(item => {
-        item.priceNew = (item.price * (100 - item.discountPercentage)/100).toFixed(1);
-        return item
-    })
+    const newProduct =productHelper.priceNewProduct(products);
 
     res.render("client/pages/products/index",{
         pageTitle:"Danh sách sản phẩm",
