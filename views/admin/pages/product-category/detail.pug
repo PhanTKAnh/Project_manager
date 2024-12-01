@@ -1,0 +1,19 @@
+extends ../../layout/default.pug
+block main
+        .container.my-3
+            .row 
+                .col-12 
+                    h4(class="mb-4")  Tên danh mục: #{data.title}
+                    if(data.status)
+                    div(class="mb-4") 
+                        span Trạng thái: 
+                        if(data.status === "active")
+                            span( class="badge badge-success") Hoạt động 
+                        if(data.status === "inactive")
+                            span( class="badge badge-danger") Dừng hoạt động 
+                    if(data.position)
+                    div(class="mb-4") Vị trí:  <b>#{data.position}</b>
+                    if(data.description)
+                    h6 Mô tả sản phẩm:
+                    div(class="mb-4") !{data.description}
+

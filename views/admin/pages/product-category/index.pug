@@ -23,19 +23,12 @@ block main
                 .row 
                     .col-8 
                         +form-change-multi(`${prefixAdmin}/product-category/change-multi?_method=PATCH`)
-    .card.mb-3 
-        .card-header Danh sách 
-            .card-body
-                .row 
-                    .col-8 
                     .col-4 
                       if(role.permissions.includes("products-category_create"))
                         a(
                             href = `${prefixAdmin}/product-category/create`
                             class="btn btn-outline-success"
                         ) + Thêm mới 
-
-   
                 table(
                     class="table table-hover table-sm"
                     checkbox-multi 

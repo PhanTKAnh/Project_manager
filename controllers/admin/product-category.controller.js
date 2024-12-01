@@ -162,3 +162,17 @@ module.exports.editPatch = async (req, res) => {
     res.redirect("back")
 
  }
+ // [GET] /admin/product-category
+module.exports.detail = async (req, res) => {
+    const id = req.params.id;
+    const data = await ProductCategory.findOne({
+        _id:id,
+        deleted:false
+    });
+
+
+    res.render("admin/pages/product-category/detail",{
+        pageTitle: "Trang chi tiết danh mục sản phẩm  ",
+        data:data,
+    });
+};

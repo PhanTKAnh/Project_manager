@@ -26,5 +26,5 @@ router.patch('/edit/:id',
     uploadCloud.upload,
     validate.createPost, 
     controller.editPatch);
-
+router.get('/detail/:id', controller.detail);
 module.exports = router;
