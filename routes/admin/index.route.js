@@ -8,6 +8,7 @@ const rolesRoute = require("./roles.route")
 const accountRoute = require("./account.route")
 const authRoute = require("./auth.route")
 const myAccountRoute = require("./my-account.route")
+const settingRoute = require("./setting.route")
 module.exports = (app) => {
   const PATCH_ADMIN = sytemConfig.prefixAdmin;
   app.use(
@@ -37,5 +38,9 @@ module.exports = (app) => {
       PATCH_ADMIN + "/my-account",
       authMiddware.requireAuth,
       myAccountRoute)
+      app.use(
+        PATCH_ADMIN + "/settings",
+        authMiddware.requireAuth,
+        settingRoute)
 
 }
