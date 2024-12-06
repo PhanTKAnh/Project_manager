@@ -52,6 +52,11 @@ app.locals.moment = moment;
 // Route
 routeAdmin(app);
 route(app);
+app.get("*",(req,res) =>{
+  res.render("client/pages/error/404.pug",{
+    pageTitle:"404 Not Found"
+  });
+});
 
 
 app.listen(port, () => {
