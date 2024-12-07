@@ -205,3 +205,111 @@ margin-bottom: 10px;
     cursor: pointer;
 }
 /* End Show alert */
+/* CHAT */
+.chat {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    max-width: 700px; /* Giới hạn chiều rộng để giao diện chat gọn gàng hơn */
+    margin: 20px auto; /* Căn giữa khung chat */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Thêm hiệu ứng đổ bóng nhẹ */
+}
+
+.chat .inner-body {
+    padding: 10px;
+    max-height: 300px; /* Giới hạn chiều cao */
+    overflow-y: auto; /* Hiển thị thanh cuộn nếu nội dung quá dài */
+}
+
+.chat .inner-body .inner-incoming,
+.chat .inner-body .inner-outgoing {
+    margin-bottom: 10px; /* Khoảng cách giữa các tin nhắn */
+}
+
+.chat .inner-body .inner-incoming {
+    display: flex;
+    flex-direction: column; /* Đảm bảo tên và nội dung nằm dọc */
+    align-items: flex-start;
+    margin-right: 10px;
+}
+
+.chat .inner-body .inner-incoming .inner-name {
+    font-size: 14px; /* Giảm kích thước font để tinh tế hơn */
+    font-weight: 600;
+    color: #333; /* Tạo sự tương phản tốt hơn với nền */
+}
+
+.chat .inner-body .inner-incoming .inner-content,
+.chat .inner-body .inner-outgoing .inner-content {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #555;
+    max-width: 70%; /* Giới hạn độ dài tin nhắn */
+    word-wrap: break-word; /* Tự xuống dòng khi văn bản quá dài */
+}
+
+.chat .inner-body .inner-outgoing {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.chat .inner-body .inner-outgoing .inner-content {
+    background-color: #FE5DA3;
+    color: white; /* Màu chữ trắng để phù hợp với nền màu */
+    border-radius: 10px 10px 0 10px;
+}
+
+.chat .inner-foot {
+    border-top: 1px solid #ddd;
+    padding: 10px;
+}
+
+.chat .inner-form {
+    display: flex;
+    align-items: center;
+}
+
+.chat .inner-form input {
+    flex: 1;
+    height: 32px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    padding: 0 10px;
+    outline: none;
+    font-size: 14px;
+    margin-right: 8px; /* Tạo khoảng cách với nút bấm */
+}
+
+.chat .inner-form button {
+    border-radius: 15px;
+    border: none; /* Loại bỏ viền mặc định */
+    background: #FE5DA3;
+    color: #fff;
+    height: 32px;
+    padding: 0 16px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.3s; /* Hiệu ứng chuyển đổi màu nền khi hover */
+}
+
+.chat .inner-form button:hover {
+    background: #e54b91; /* Màu đậm hơn khi hover */
+}
+
+/* Scrollbar tùy chỉnh */
+.chat .inner-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat .inner-body::-webkit-scrollbar-thumb {
+    background-color: #ddd;
+    border-radius: 5px;
+}
+
+.chat .inner-body::-webkit-scrollbar-thumb:hover {
+    background-color: #bbb;
+}
+
+/* END CHAT */

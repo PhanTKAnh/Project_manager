@@ -1,0 +1,38 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+block main
+    .container 
+        .row
+            .col-12
+            +box-head("Chat")
+        .row 
+            .col-12 
+                .chat 
+                    .inner-body
+                        .inner-incoming 
+                            .inner-name AN
+                            .inner-content 
+                                |hi hfaoeiwuhawwwwwwuioeotfjgeioajgfoladjgvklafklashfuoiaeroawfilwehdioqwqgrhhfhfbvhfjfbfbjfhjf
+                        .inner-outgoing 
+                            .inner-content 
+                                |hello   
+                        .inner-incoming 
+                            .inner-name An
+                            .inner-content 
+                                |how are you?
+                        .inner-outgoing 
+                            .inner-content 
+                                |Iam fire   
+                    .inner-foot 
+                        form(
+                            class="inner-form"
+                            action =""
+                        )
+                            input(
+                                type="text"
+                                placehodler ="Nhap noi dung"
+                                name="content"
+                            )
+                            button 
+                                i.fa-solid.fa-paper-plana
+                
