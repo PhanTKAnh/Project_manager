@@ -3,6 +3,7 @@ include ../../mixins/alert.pug
 block main 
     +alert-success(3000)
     +alert-error(3000)
+if(role.permissions.includes("permissions_setting"))
     h1 Cài đặt chung
     form(
         action=`${prefixAdmin}/settings/general?_method=PATCH`
@@ -73,9 +74,9 @@ block main
                 value=(settingGeneral? settingGeneral.copyright: "")
                 )
         div(class = "form-group")
-           button(
-            type="submit"
-            class="btn btn-primary"
-            ) Cập nhật 
-    
+            button(
+                type="submit"
+                class="btn btn-primary"
+                ) Cập nhật 
+
 

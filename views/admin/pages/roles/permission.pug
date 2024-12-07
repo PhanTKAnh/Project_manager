@@ -128,6 +128,15 @@ block main
                          each item in record
                             td(class="text-center")
                                 input(type="checkbox")
+
+                    //- Cài đặt chung 
+                    tr(data-name="permissions_setting")
+                        td 
+                            b Cài đặt chung 
+                        each item in record
+                            td(class="text-center")
+                                input(type="checkbox")                       
+                   
     form(
         id="form-change-permissions"
         action=`${prefixAdmin}/roles/permissions?_method=PATCH`
