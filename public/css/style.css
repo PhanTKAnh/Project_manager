@@ -209,98 +209,93 @@ margin-bottom: 10px;
 .chat {
     border: 1px solid #ddd;
     border-radius: 10px;
-    max-width: 700px; /* Giới hạn chiều rộng để giao diện chat gọn gàng hơn */
-    margin: 20px auto; /* Căn giữa khung chat */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Thêm hiệu ứng đổ bóng nhẹ */
+    max-width: 700px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Vùng nội dung tin nhắn */
 .chat .inner-body {
     padding: 10px;
-    max-height: 300px; /* Giới hạn chiều cao */
-    overflow-y: auto; /* Hiển thị thanh cuộn nếu nội dung quá dài */
+    max-height: 400px;
+    overflow-y: auto;
 }
 
-.chat .inner-body .inner-incoming,
-.chat .inner-body .inner-outgoing {
-    margin-bottom: 10px; /* Khoảng cách giữa các tin nhắn */
-}
-
+/* Tin nhắn Incoming */
 .chat .inner-body .inner-incoming {
     display: flex;
-    flex-direction: column; /* Đảm bảo tên và nội dung nằm dọc */
+    flex-direction: column;
     align-items: flex-start;
-    margin-right: 10px;
+    margin-bottom: 10px;
 }
 
-.chat .inner-body .inner-incoming .inner-name {
-    font-size: 14px; /* Giảm kích thước font để tinh tế hơn */
-    font-weight: 600;
-    color: #333; /* Tạo sự tương phản tốt hơn với nền */
-}
-
-.chat .inner-body .inner-incoming .inner-content,
-.chat .inner-body .inner-outgoing .inner-content {
-    background-color: #f5f5f5;
-    border-radius: 10px;
+.chat .inner-body .inner-incoming .inner-content {
+    background-color: #f1f1f1;
+    color: #333;
+    border-radius: 10px 10px 10px 0;
     padding: 8px 12px;
     font-size: 14px;
-    color: #555;
-    max-width: 70%; /* Giới hạn độ dài tin nhắn */
-    word-wrap: break-word; /* Tự xuống dòng khi văn bản quá dài */
+    max-width: 70%;
+    word-wrap: break-word;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Tin nhắn Outgoing */
 .chat .inner-body .inner-outgoing {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-bottom: 10px;
 }
 
 .chat .inner-body .inner-outgoing .inner-content {
-    background-color: #FE5DA3;
-    color: white; /* Màu chữ trắng để phù hợp với nền màu */
+    background-color: #4CAF50; /* Màu nền nổi bật cho tin nhắn đi */
+    color: white;
     border-radius: 10px 10px 0 10px;
+    padding: 8px 12px;
+    font-size: 14px;
+    max-width: 70%;
+    word-wrap: break-word;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.chat .inner-foot {
-    border-top: 1px solid #ddd;
-    padding: 10px;
-}
-
-.chat .inner-form {
+/* Hình ảnh trong tin nhắn */
+.chat .inner-body .inner-images {
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 8px;
 }
 
-.chat .inner-form input {
-    flex: 1;
-    height: 32px;
-    border: 1px solid #ddd;
-    border-radius: 15px;
-    padding: 0 10px;
-    outline: none;
-    font-size: 14px;
-    margin-right: 8px; /* Tạo khoảng cách với nút bấm */
+.chat .inner-body .inner-images img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.chat .inner-form button {
-    border-radius: 15px;
-    border: none; /* Loại bỏ viền mặc định */
-    background: #FE5DA3;
-    color: #fff;
-    height: 32px;
-    padding: 0 16px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    transition: background 0.3s; /* Hiệu ứng chuyển đổi màu nền khi hover */
+/* Hình ảnh cho Incoming */
+.chat .inner-body .inner-incoming .inner-images {
+    align-items: flex-start;
 }
 
-.chat .inner-form button:hover {
-    background: #e54b91; /* Màu đậm hơn khi hover */
+.chat .inner-body .inner-incoming .inner-images img {
+    margin-right: 5px;
+}
+
+/* Hình ảnh cho Outgoing */
+.chat .inner-body .inner-outgoing .inner-images {
+    align-items: flex-end;
+}
+
+.chat .inner-body .inner-outgoing .inner-images img {
+    margin-left: 5px;
 }
 
 /* Scrollbar tùy chỉnh */
 .chat .inner-body::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
 }
 
 .chat .inner-body::-webkit-scrollbar-thumb {
@@ -312,4 +307,242 @@ margin-bottom: 10px;
     background-color: #bbb;
 }
 
+
+.chat .inner-foot {
+    border-top: 1px solid #ddd;
+    padding: 10px;
+    background-color: #f9f9f9; /* Làm nổi bật phần chân */
+}
+
+.chat .inner-form {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Khoảng cách giữa các thành phần */
+}
+
+.chat .inner-form input {
+    flex: 1;
+    height: 36px;
+    border: 1px solid #ddd;
+    border-radius: 18px;
+    padding: 0 12px;
+    outline: none;
+    font-size: 14px;
+    transition: border 0.3s; /* Hiệu ứng khi focus */
+}
+
+.chat .inner-form input:focus {
+    border: 1px solid #FE5DA3; /* Màu viền khi được chọn */
+}
+
+.chat .inner-form button {
+    border-radius: 18px;
+    border: none; /* Loại bỏ viền mặc định */
+    background: #FE5DA3;
+    color: #fff;
+    height: 36px;
+    padding: 0 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.3s; /* Hiệu ứng hover */
+}
+
+.chat .inner-form button:hover {
+    background: #e54b91; /* Màu đậm hơn khi hover */
+}
+
+/* Scrollbar tùy chỉnh */
+.chat .inner-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat .inner-body::-webkit-scrollbar-thumb {
+    background-color: #ddd;
+    border-radius: 5px;
+}
+
+.chat .inner-body::-webkit-scrollbar-thumb:hover {
+    background-color: #bbb;
+}
+.chat .inner-preview-images{
+    position: relative;
+}
+.chat .inner-preview-images .custom-file-container .label-container{
+    display: none;
+}
+.chat .inner-preview-images .custom-file-container .input-container{
+    display: none;
+}
+.chat .inner-preview-images .image-preview{
+    height: auto;
+    padding: 0;
+    border-radius: 0;
+}
+.chat .inner-preview-images .custom-file-container .image-preview-item{
+    width: 90px;
+    background-size: contain;
+}
 /* END CHAT */
+
+/* emoji-picker-element */
+.tooltip {
+    visibility: hidden;
+}
+.tooltip.shown{
+    visibility: visible;
+    opacity: 1;
+}
+/* emoji-picker-element */
+
+/* box typing */
+.box-typing{
+    position: relative;
+}
+.box-typing .inner-dots{
+    position: relative;
+    height: 20px;
+    width: 50px;
+    display: inline-flex;
+    justify-content: center;
+    background: #efefef;
+    border-radius: 45px;
+    margin-top: 2px;
+
+}
+.box-typing  .inner-dots span{
+    animation: blink 1.5s infinite;
+    height: 5px;
+    width: 5px;
+    background: #252525;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 2px;
+}
+.box-typing .inner-dots span:nth-child(2){
+    animation-delay:0.2s ;
+}
+.box-typing .inner-dots span:nth-child(3){
+    animation-delay:0.4s ;
+}
+@keyframes blink {
+    0%{
+        opacity: 0.1;
+    }
+    20%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0.1;
+    }
+}
+/*end box typing */
+
+/* box-user */
+.box-user{
+    display: flex;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+}
+
+.box-user .inner-avatar{
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    overflow: hidden;
+    background: #f2f2f2;
+    margin-right: 10 px;
+}
+
+.box-user .inner-avatar img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.box-user .inner-info{
+    flex: 1;
+}
+.box-user .inner-info .inner-name{
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.box-user [btn-cancel-friend] {
+    display: none;
+}
+.box-user.add [btn-add-friend]{
+    display: none;
+}
+.box-user.add [btn-cancel-friend]{
+    display: inline-block;
+}
+.box-user [btn-deleted-friend]{
+    display: none;
+}
+.box-user.refuse [btn-accept-friend]{
+    display: none;
+}
+.box-user.refuse [btn-refuse-friend]{
+    display: none;
+}
+.box-user.refuse [btn-deleted-friend]{
+    display: inline-block;
+}
+.box-user [btn-accepted-friend]{
+    display: none;
+}
+.box-user.accepted [btn-accept-friend]{
+    display: none;
+}
+.box-user.accepted [btn-refuse-friend]{
+    display: none;
+}
+.box-user.accepted [btn-accepted-friend]{
+    display: inline-block;
+}
+.box-user .inner-status {
+    font-size: 12px;
+    color: #00d800;
+    opacity: 0;
+    position: absolute;
+    top: 9px;
+    right: 13px;
+  }
+  .box-user .inner-status[status="online"] {
+    opacity: 1;
+  }
+/*End box-user */
+
+/* box-room */
+.box-room {
+    display: flex;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+  }
+  .box-room .inner-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #f2f2f2;
+    margin-right: 10px;
+  }
+  .box-room .inner-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .box-room .inner-info {
+    flex: 1;
+  }
+  .box-room .inner-info .inner-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+  /* End box-room */

@@ -17,6 +17,15 @@ const userSchema = new mongoose.Schema(
             type:String,
             default:"active"
         },
+        requestFriends:Array, // lời mời đã gửigửi
+        acceptFriends:Array, // Lời mới chập nhận
+        friendList:[
+            {
+                user_id: String,
+                room_chat_id: String
+            }
+        ],
+        statusOnline:String,
         deleted: {
             type: Boolean,
             default: false

@@ -1,14 +1,26 @@
 include ../mixins/alert.pug
 doctype html 
 html 
-    head 
-      title #{pageTitle}
-      <script src="https://kit.fontawesome.com/2b9cdc1c9a.js" crossorigin="anonymous"></script>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous")
-      link(rel="stylesheet", href="/css/style.css")
+  head
+    title #{pageTitle}
+    // Bootstrap CSS
+    link(
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" 
+      rel="stylesheet" 
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" 
+      crossorigin="anonymous"
+    )
+    // Font Awesome mới nhất (v6.x)
+    link(
+      rel="stylesheet" 
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    ) 
+    link(rel="stylesheet",  href="https://unpkg.com/file-upload-with-preview/dist/style.css")
+    link(rel="stylesheet",  href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.7/viewer.css")
+    // CSS của bạn
+    link(rel="stylesheet", href="/css/style.css")
 
-    body 
+  body 
     +alert-success(3000)
     +alert-error(3000)
     include ../partials/header.pug
@@ -19,4 +31,14 @@ html
     //- Socket Io
     script(src="/socket.io/socket.io.js") 
     script(src="/js/socket.js") 
+    
+    //- emoji-picker-element
+    script(type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js")
+    script(type="module", src="https://unpkg.com/file-upload-with-preview/dist/index.js") 
+    //- viewer js
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.7/viewer.js")
+  
+
     script(src="/js/script.js") 
+    
+    block script 

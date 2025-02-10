@@ -18,4 +18,4 @@ const chatSchema = new mongoose.Schema(
 );
 const Chat = mongoose.model('Chat', chatSchema, "chat");
 
-module.exports = Role;
+module.exports = Chat;

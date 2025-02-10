@@ -1,28 +1,32 @@
 extends ../../layouts/default.pug
 include ../../mixins/box-head.pug
 block main
-    .container 
+    .container.my-3 
+
         .row
             .col-12
             +box-head("Chat")
+        include ../../partials/list-btn-users.pug
+        
         .row 
             .col-12 
-                .chat 
+                .chat( my-id=user.id ) 
                     .inner-body
-                        .inner-incoming 
-                            .inner-name AN
-                            .inner-content 
-                                |hi hfaoeiwuhawwwwwwuioeotfjgeioajgfoladjgvklafklashfuoiaeroawfilwehdioqwqgrhhfhfbvhfjfbfbjfhjf
-                        .inner-outgoing 
-                            .inner-content 
-                                |hello   
-                        .inner-incoming 
-                            .inner-name An
-                            .inner-content 
-                                |how are you?
-                        .inner-outgoing 
-                            .inner-content 
-                                |Iam fire   
+                        each chat in chats
+                            div(class=(chat.user_id == user.id ? "inner-outgoing" : "inner-incoming "))
+                                if(chat.user_id != user.id )
+                                    .inner-name #{chat.inforUser.fullName}
+                                if(chat.content)
+                                    .inner-content 
+                                        |#{chat.content}
+                                if(chat.images)
+                                    .inner-images 
+                                        each image in chat.images
+                                            img(src=image)
+                        .inner-list-typing
+
+                    .inner-preview-images
+                        div(class="custom-file-container" data-upload-id="upload-image")
                     .inner-foot 
                         form(
                             class="inner-form"
@@ -30,9 +34,20 @@ block main
                         )
                             input(
                                 type="text"
-                                placehodler ="Nhap noi dung"
+                                placeholder="Nhap noi dung"
                                 name="content"
                             )
-                            button 
-                                i.fa-solid.fa-paper-plana
-                
+                            label(for="file-upload-with-preview-upload-image" class="btn btn-light mx-2 mb-0")
+                                i.fa.fa-image
+                            span(class="button-icon btn btn-light mx-2")
+                                i.fa.fa-smile
+                            button
+                                i.fa-solid.fa-paper-plane
+
+
+
+    div(class="tooltip" role="tooltip")
+        emoji-picker( class="light")
+
+    block script 
+        script(type="module" src="/js/chat.js")
